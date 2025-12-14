@@ -7,11 +7,4 @@ student_analysis_project/
 │   ├── hypothesis.html
 │   ├── visualization.html
 │   └── recommendations.html
-│
-├── static/
-│   ├── css/
-│   │   └── style.css
-│   └── images/
-│       └── logo.png (опционально)
-│
 └── StudentsPerformance.csv
