@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендации - Анализ абитуриентов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+        }
+        
+        .recommendation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .priority-high { border-left: 5px solid #dc3545; }
+        .priority-medium { border-left: 5px solid #ffc107; }
+        .priority-low { border-left: 5px solid #28a745; }
+        
+        .impact-badge {
+            font-size: 0.9rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+        
+        .roi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-chart-line me-2"></i>Анализ Абитуриентов
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <a href="/" class="btn btn-primary mb-4">
+            <i class="fas fa-arrow-left me-2"></i>Назад к главной
+        </a>
+        
+        <div class="recommendation-card">
+            <h1 class="mb-4">
+                <i class="fas fa-bullseye text-danger me-2"></i>Бизнес-рекомендации и стратегии
+            </h1>
+            
+            <div class="alert alert-success">
+                <h4 class="alert-heading">
+                    <i class="fas fa-check-circle me-2"></i>Гипотеза подтверждена
+                </h4>
+                <p class="mb-0">
+                    Анализ данных подтвердил, что подготовительные курсы повышают результаты экзаменов у абитуриентов из семей без высшего образования на <strong>{{ data.avg_score_diff }} баллов</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <!-- ROI и потенциал -->
+        <div class="roi-card">
+            <div class="row">
+                <div class="col-md-4 text-center mb-3">
+                    <h2 class="display-4">+{{ data.avg_score_diff }}</h2>
+                    <p class="mb-0">Средний прирост баллов</p>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                    <h2 class="display-4">{{ data.potential_students }}</h2>
+                    <p class="mb-0">Потенциальных клиентов</p>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                    <h2 class="display-4">{{ data.growth_percentage }}%</h2>
+                    <p class="mb-0">Рост эффективности</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Рекомендации по продуктам -->
+        <div class="recommendation-card priority-high">
+            <h3 class="mb-4">
+                <i class="fas fa-rocket text-danger me-2"></i>Высокоприоритетные рекомендации
+            </h3>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-bullseye me-2"></i>Рекомендация 1: Целевые программы
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Действие:</strong> Разработать специализированные курсы для детей из семей без высшего образования</p>
+                            <p><strong>Ожидаемый эффект:</strong> Прирост баллов +{{ data.avg_score_diff }}, рост доли успешных абитуриентов на {{ data.target_diff }}%</p>
+                            <p><strong>Сроки:</strong> 3-6 месяцев</p>
+                            <div class="mt-3">
+                                <span class="impact-badge bg-danger">Высокое влияние</span>
+                                <span class="impact-badge bg-success ms-2">Быстрая реализация</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-line me-2"></i>Рекомендация 2: Фокус на {{ data.max_diff_subject }}
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Действие:</strong> Создать интенсивные курсы по {{ data.max_diff_subject }} с индивидуальным подходом</p>
+                            <p><strong>Ожидаемый эффект:</strong> Максимальный прирост результатов в слабых областях</p>
+                            <p><strong>Сроки:</strong> 2-4 месяца</p>
+                            <div class="mt-3">
+                                <span class="impact-badge bg-danger">Высокое влияние</span>
+                                <span class="impact-badge bg-warning ms-2">Средняя сложность</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Среднеприоритетные рекомендации -->
+        <div class="recommendation-card priority-medium">
+            <h3 class="mb-4">
+                <i class="fas fa-tasks text-warning me-2"></i>Среднеприоритетные рекомендации
+            </h3>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Программа "Обед + Уроки"</h5>
+                            <p>Комбинированное предложение для абитуриентов с бесплатным питанием</p>
+                            <span class="badge bg-warning">Социальный проект</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Групповые занятия</h5>
+                            <p>Занятия в малых группах по этнической принадлежности</p>
+                            <span class="badge bg-info">Комьюнити</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Онлайн-платформа</h5>
+                            <p>Разработка цифровой платформы для дистанционного обучения</p>
+                            <span class="badge bg-primary">Технологии</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Дорожная карта -->
+        <div class="recommendation-card">
+            <h3 class="mb-4">
+                <i class="fas fa-road text-success me-2"></i>Дорожная карта реализации
+            </h3>
+            
+            <div class="timeline-item">
+                <h5>Этап 1: Подготовка (1-2 месяца)</h5>
+                <ul>
+                    <li>Разработка учебных программ</li>
+                    <li>Подбор преподавателей</li>
+                    <li>Создание маркетинговых материалов</li>
+                </ul>
+            </div>
+            
+            <div class="timeline-item">
+                <h5>Этап 2: Пилотный проект (3-4 месяца)</h5>
+                <ul>
+                    <li>Запуск первой группы (20-30 человек)</li>
+                    <li>Сбор обратной связи</li>
+                    <li>Корректировка программы</li>
+                </ul>
+            </div>
+            
+            <div class="timeline-item">
+                <h5>Этап 3: Масштабирование (5-8 месяцев)</h5>
+                <ul>
+                    <li>Расширение до 100+ участников</li>
+                    <li>Развитие онлайн-платформы</li>
+                    <li>Партнерства со школами</li>
+                </ul>
+            </div>
+            
+            <div class="timeline-item">
+                <h5>Этап 4: Оптимизация (9-12 месяцев)</h5>
+                <ul>
+                    <li>Анализ результатов</li>
+                    <li>Оптимизация процессов</li>
+                    <li>Разработка новых направлений</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Риски и возможности -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Потенциальные риски
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Низкая платежеспособность целевой аудитории</li>
+                            <li>Конкуренция с государственными программами</li>
+                            <li>Сезонность спроса на подготовительные курсы</li>
+                            <li>Трудности в привлечении квалифицированных преподавателей</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>Возможности для роста
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Гранты и субсидии для социальных проектов</li>
+                            <li>Партнерства с образовательными учреждениями</li>
+                            <li>Развитие онлайн-форматов обучения</li>
+                            <li>Экспорт успешной модели в другие регионы</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ключевые показатели -->
+        <div class="recommendation-card mt-4">
+            <h3 class="mb-4">
+                <i class="fas fa-chart-pie text-primary me-2"></i>Ключевые показатели успеха (KPI)
+            </h3>
+            
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>60%</h3>
+                            <small>Доля абитуриентов с 60+ баллами</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>100+</h3>
+                            <small>Участников в год</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>25%</h3>
+                            <small>Рост результатов</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>90%</h3>
+                            <small>Удовлетворенность клиентов</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Заключение -->
+        <div class="alert alert-info mt-4">
+            <h4 class="alert-heading">
+                <i class="fas fa-flag-checkered me-2"></i>Заключение
+            </h4>
+            <p>
+                Анализ данных подтвердил эффективность подготовительных курсов для целевой аудитории. 
+                Реализация предложенных рекомендаций позволит не только улучшить образовательные результаты, 
+                но и создать устойчивую бизнес-модель с социальным воздействием.
+            </p>
+            <hr>
+            <p class="mb-0">
+                <strong>Следующие шаги:</strong> Разработка детального бизнес-плана, поиск партнеров, 
+                подготовка пилотного проекта.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
